@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #333;
+        }
+        .wrap{
+            position: relative;
+            height: 200px;
+            width: 100px;
+            border: 3px solid #333;
+            box-shadow: 0 0 0 2px #fff,
+                        inset 0 0 10px #fff;
+            border-radius: 5px;
+            background-color: rgb(51, 224, 20);
+            background-clip: content-box;
+            overflow: hidden;
+        }
+        .wrap::before,
+        .wrap::after{
+            display: block;
+            content: '';
+            background-color: #333;
+            height: 300px;
+            width: 300px;
+            position: absolute;
+            top: -170%;
+            left: -100%;
+            border-radius: 43% 43% 43% 43%;
+            animation: rotate 24s linear infinite;
+        }
+        .wrap::after{
+            opacity: .5;
+            transform: rotate(100deg);
+            animation: rotate 24s linear infinite;
+        }
+        @keyframes rotate {
+            50%{
+                transform:translateY(100%) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap"></div>
+</body>
+</html>

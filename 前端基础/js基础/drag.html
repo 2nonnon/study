@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            height: 100vh;
+            padding: 0;
+            margin: 0;
+            background-color: bisque;
+        }
+        @media screen and (max-width:1080px){
+            body{
+                flex-direction: column;
+            }
+        }
+        .container1,
+        .container2{
+            position: relative;
+            height: 300px;
+            width: 500px;
+        }
+        .container1{
+            background-color: pink;
+        }
+        .container2{
+            background-color: skyblue;
+        }
+        .box1,
+        .box2,
+        .square{
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 50px;
+            width: 50px;
+            background-color: aliceblue;
+        }
+        .square{
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(136, 136, 136, 0.5)
+        }
+        .box1,
+        .box2{
+            z-index: 99;
+        }
+    </style>
+</head>
+<body>
+    <section class="container1">
+        <div class="box1" draggable="true"></div>
+        <div class="square"></div>
+    </section>
+    <section class="container2">
+        <div class="box2"></div>
+        <div class="square"></div>
+    </section>
+
+    <script>
+        const container1 = document.querySelector('.container1')
+        const container2 = document.querySelector('.container2')
+        const box1 = document.querySelector('.box1')
+        const box2 = document.querySelector('.box2')
+        const square1 = document.querySelector('.container1 .square')
+        const square2 = document.querySelector('.container2 .square')
+
+        // drag事件
+        box1.addEventListener('dragstart', (e)=>{
+            console.log('start')
+        }, false)
+
+        box1.addEventListener('drag', (e)=>{
+            e.target.style.border = '3px solid green'
+            square1.style.border = '3px solid #f50'
+        }, false)
+
+        box1.addEventListener('dragend', (e)=>{
+            e.target.style.border = 'none'
+            square1.style.border = 'none'
+        }, false)
+
+        square1.addEventListener('dragenter', (e) => {
+            console.log('enter');
+        }, false)
+
+        square1.addEventListener('dragover', (e) => {
+            console.log('over');
+            e.preventDefault()
+        }, false)
+
+        square1.addEventListener('drop', (e) => {
+            console.log('drop');
+            e.preventDefault()
+            e.target.appendChild(box1)
+        }, false)
+
+        box1.addEventListener('mousedown', (e) => {
+            if(square1.firstChild){
+                container1.appendChild(square1.removeChild(square1.firstChild))
+            }
+        }, false)
+
+        // mouse事件
+        const backLeft = container2.offsetLeft
+        const backTop = container2.offsetTop
+
+        box2.addEventListener('mousedown', (e) => {
+            const mouseLeft = e.pageX - backLeft - box2.offsetLeft
+            const mouseTop = e.pageY - backTop - box2.offsetTop
+            
+            function moving(e){
+                box2.style.left = e.pageX - backLeft - mouseLeft + 'px'
+                box2.style.top = e.pageY - backTop - mouseTop + 'px'
+            }
+
+            document.addEventListener('mousemove', moving, false)
+
+            document.addEventListener('mouseup', (e) => {
+                document.removeEventListener('mousemove', moving)
+            }, false)
+        }, false)
+    </script>
+</body>
+</html>

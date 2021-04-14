@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        button{
+            color: aqua;
+            background-color: cadetblue;
+            width: 250px;
+            height: 150px;
+            line-height: 150px;
+            font-size: 4rem;
+            font-family: Helvetica;
+            border: 1px solid #fff;
+            border-radius: 30px;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <button>剁手</button>
+
+    <script>
+        const btn = document.querySelector("button")
+
+        function buy(){
+            console.log("已剁")
+        }
+
+        function fangDou(func, delay){
+            let timer
+            return function(){
+                let context = this
+                let args = arguments
+                clearTimeout(timer)
+                timer = setTimeout(function() {
+                    func.apply(context, args)
+                }, delay)
+            }
+        }
+
+        btn.addEventListener("click", fangDou(buy, 1000), false)
+    </script>
+</body>
+</html>

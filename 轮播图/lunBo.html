@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ch">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        width: 100vw;
+        background-color: pink;
+      }
+      .trap {
+        height: 400px;
+        width: 650px;
+        position: relative;
+        overflow: hidden;
+      }
+      .container {
+        height: 400px;
+        width: calc(650px * 3);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* overflow: hidden; */
+      }
+      .container:hover img#right {
+        animation-play-state: paused !important;
+      }
+
+      .container input {
+        position: absolute;
+        visibility: hidden;
+      }
+
+      .container label {
+        height: 10px;
+        width: 10px;
+        /* border: 3px solid #fff; */
+        border-radius: 10px;
+        background-color: #fff;
+        cursor: pointer;
+        position: absolute;
+        bottom: 10px;
+        left: 90%;
+        transform: translateX(calc(-10px + 27px * var(--i)));
+        transition: 0.3s;
+        z-index: 100;
+      }
+
+      label:hover {
+        background-color: pink;
+        box-shadow: 0 0 0 3px #fff;
+      }
+
+      .container img {
+        height: 400px;
+        width: 650px;
+        transition: 0.3s;
+      }
+
+      .container input#c1:checked ~ img#right {
+        margin-right: 0%;
+        animation: scroll1 12s ease 1.5s infinite reverse none;
+        
+      }
+
+      .container input#c2:checked ~ img#right {
+        margin-right: 66.7%;
+        animation: scroll2 12s ease 1.5s infinite reverse none;
+        
+      }
+
+      .container input#c3:checked ~ img#right {
+        margin-right: 133.3%;
+        animation: scroll3 12s ease 1.5s infinite reverse none;
+        
+      }
+
+      @keyframes scroll1 {
+        0% {
+          margin-right: 0;
+        }
+        22% {
+          margin-right: 0;
+        }
+        25% {
+          margin-right: 66.7%;
+        }
+        47% {
+          margin-right: 66.7%;
+        }
+        50% {
+          margin-right: 133.3%;
+        }
+        72% {
+          margin-right: 133.3%;
+        }
+        75% {
+          margin-right: 66.7%;
+        }
+        97% {
+          margin-right: 66.7%;
+        }
+        100% {
+          margin-right: 0;
+        }
+      }
+
+      @keyframes scroll2 {
+        0% {
+          margin-right: 66.7%;
+        }
+        22% {
+          margin-right: 66.7%;
+        }
+        25% {
+          margin-right: 133.3%;
+        }
+        47% {
+          margin-right: 133.3%;
+        }
+        50% {
+          margin-right: 66.7%;
+        }
+        72% {
+          margin-right: 66.7%;
+        }
+        75% {
+          margin-right: 0;
+        }
+        97% {
+          margin-right: 0;
+        }
+        100% {
+          margin-right: 66.7%;
+        }
+      }
+
+      @keyframes scroll3 {
+        0% {
+          margin-right: 133.3%;
+        }
+        22% {
+          margin-right: 133.3%;
+        }
+        25% {
+          margin-right: 66.7%;
+        }
+        47% {
+          margin-right: 66.7%;
+        }
+        50% {
+          margin-right: 0;
+        }
+        72% {
+          margin-right: 0;
+        }
+        75% {
+          margin-right: 66.7%;
+        }
+        97% {
+          margin-right: 66.7%;
+        }
+        100% {
+          margin-right: 133.3%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="trap">
+      <div class="container">
+        <input type="radio" name="c" id="c1" checked />
+        <label for="c1" style="--i: -1"></label>
+        <img src="./01_non.jpg" alt="non" style="--i: 0" />
+
+        <input type="radio" name="c" id="c2" />
+        <label for="c2" style="--i: 0"></label>
+        <img src="./02_non.jpg" alt="non" style="--i: 1" />
+
+        <input type="radio" name="c" id="c3" />
+        <label for="c3" style="--i: 1"></label>
+        <img src="./05_non.jpg" alt="non" style="--i: 2" id="right" />
+      </div>
+    </div>
+  </body>
+</html>
