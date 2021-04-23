@@ -219,8 +219,8 @@
 
         nav.addEventListener("click", (e) => {
           if(e.target.nodeName == "SPAN"){
-            count = e.target.dataset.no
-            move.style.marginRight = e.target.dataset.no * 100 + "%"
+            count = parseInt(e.target.dataset.no)
+            move.style.marginRight = parseInt(e.target.dataset.no) * 100 + "%"
             nav.children[child].className = ""
             child = parseInt(e.target.dataset.no) + 3
             nav.children[child].className = "is"

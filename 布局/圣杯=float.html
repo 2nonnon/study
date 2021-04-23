@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            height: 100vh;
+            min-width: 500px;
+        }
+        header,
+        footer{
+            background-color: aqua;
+            width: 100%;
+            height: 10%;
+            line-height:10vh;
+            text-align: center;
+            color: #f50;
+        }
+        footer{
+            clear: both;
+            background-color: aquamarine;
+        }
+        .wrapper{
+            height: 80%;
+            padding: 0 150px;
+        }
+        .flow{
+            float: left;
+        }
+        .center{
+            background-color: pink;
+            height: 100%;
+            width: 100%;
+        }
+        .left{
+            background-color: skyblue;
+            width: 150px;
+            height: 100%;
+            margin-left: -100%;
+            position: relative;
+            left: -150px;
+        }
+        .right{
+            background-color: gold;
+            width: 150px;
+            height: 100%;
+            margin-right: -150px;
+        }
+    </style>
+</head>
+<body>
+    <header>头部</header>
+    <section class="wrapper">
+        <div class="center flow"></div>
+        <div class="left flow"></div>
+        <div class="right flow"></div>
+    </section>
+    <footer>底部</footer>
+</body>
+</html>
