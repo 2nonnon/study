@@ -20,7 +20,6 @@ body{
     padding: 0.2rem;
     height: 7rem;
     width: 7rem;
-    flex: 0 0 auto;
     background-color: skyblue;
     background-clip: content-box;
     position: relative;
