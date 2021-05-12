@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>tab</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background-color: #566270;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container{
+            display: flex;
+            position: relative;
+            width: 300px;
+            height: 40px;
+            border-radius: 20px;
+            background-color: #e0e3da;
+            overflow: hidden;
+        }
+        .container label{
+            font-size: 16px;
+            line-height: 40px;
+            color: #fffff3;
+            text-align: center;
+            display: block;
+            width: 100px;
+            height: 40px;
+            background-color: rgba(0, 0, 0, 0);
+            border-radius: 20px;
+            transition: all .2s linear;
+            user-select: none;
+            cursor: pointer;
+            z-index: 10;
+        }
+        .container input[type="radio"]{
+            position: absolute;
+            opacity: 0;
+        }
+        .container input[type="radio"]:checked + label{
+            color: #566270;
+        }
+        .cover{
+            position: absolute;
+            width: 100px;
+            height: 40px;
+            background-color: #fffff3;
+            transition: all .2s linear;
+            border-radius: 20px;
+            z-index: 5;
+        }
+        .container input[type="radio"]#c1:checked ~ div.cover{
+            left: 0;
+        }
+        .container input[type="radio"]#c2:checked ~ div.cover{
+            left: 100px;
+        }
+        .container input[type="radio"]#c3:checked ~ div.cover{
+            left: 200px;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <input type="radio" name="cb" id="c1" checked>
+      <label for="c1">operation1</label>
+      <input type="radio" name="cb" id="c2">
+      <label for="c2">operation2</label>
+      <input type="radio" name="cb" id="c3">
+      <label for="c3">operation3</label>
+      <div class="cover"></div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>infinite</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            background-color: #eee;
+        }
+        .container{
+            display: flex;
+            margin-top: 3rem;
+            width: 80%;
+        }
+        .container .main{
+            background-color: #fff;
+            background-clip: content-box;
+            width: 64%;
+            padding-right: 1%;
+            text-align: center;
+            line-height: 3rem;
+        }
+        .container .side{
+            display: flex;
+            flex-direction: column;
+            width: 35%;
+        }
+        .wrapper{
+            display: flex;
+            flex-direction: column;
+            height: 4rem;
+            width: 100%;
+            background-color: #fff;
+            margin-bottom: 0.2rem;
+            padding: 0.2rem;
+        }
+        .title{
+            height: 1.5rem;
+            line-height: 1.5rem;
+            font-size: 1rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .content{
+            height: 2.5rem;
+            line-height: 1.25rem;
+            font-size: 0.75rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="main">main content</div>
+        <div class="side"></div>
+    </div>
+
+    <script>
+        const side = document.querySelector('.side')
+        
+        const createE = function(result){
+            const docFrag = new DocumentFragment()
+            const {values} = Object
+            const arr = []
+            for(const value of values(result)){
+                arr.push(value)
+            }
+            arr.map(function(value){
+                const wrapper = document.createElement('div')
+                const title = document.createElement('span')
+                const content = document.createElement('span')
+                title.innerText = value[0]
+                content.innerText = value[1]
+                title.setAttribute('class', 'title')
+                content.setAttribute('class', 'content')
+                wrapper.setAttribute('class', 'wrapper')
+                wrapper.appendChild(title)
+                wrapper.appendChild(content)
+                docFrag.appendChild(wrapper)
+            })
+            side.appendChild(docFrag)
+            console.log(arr)
+        }
+
+        const loadXMLDoc = function(url){
+            return new Promise(function(resolve, reject){
+                let xmlhttp
+                if(window.XMLHttpRequest)
+                    xmlhttp = new XMLHttpRequest()
+                else
+                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP")
+                xmlhttp.onreadystatechange = () => {
+                    let result
+                    if(xmlhttp.readyState === 4 && xmlhttp.status === 200){
+                        result = JSON.parse(xmlhttp.responseText)
+                        if(result){
+                            resolve(result)
+                        }else{
+                            reject("failed")
+                        }
+                    }
+                }
+                xmlhttp.open("GET", url, true)
+                xmlhttp.send()
+            })
+        }
+
+        const getData = function(url, cb){
+            loadXMLDoc(url).then(result => cb(result)).catch(function(error){
+                console.log(error)
+            })
+        }
+
+        const debounce = function(func, delay){
+            let timer
+            return (...arr) => {
+                clearTimeout(timer)
+                timer = setTimeout(function(){
+                    func.apply(this, arr)
+                }, delay)
+            }
+        }
+
+        const load = function(){
+            const scrollHright = document.body.scrollHeight
+            const scrollTop = document.body.scrollTop || document.documentElement.scrollTop
+            const clientHeight = document.documentElement.clientHeight
+
+            const distance = scrollHright - scrollTop - clientHeight;
+            
+            if(distance < 10) getData('data.json', createE)
+        }
+
+        window.addEventListener('scroll', debounce(load, 100))
+
+        getData('data.json', createE)
+    </script>
+</body>
+</html>
